@@ -1,0 +1,47 @@
+@import url('./blocks/page/page.css');
+@import url('./blocks/game/game.css');
+/* @import url('./blocks/cube/cube.css'); */
+
+.cubes {
+  display: flex;
+  gap: 10px;
+}
+
+.cube {
+  width: 25px;
+  height: 25px;
+  background-color: green;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+}
+
+.question__statement {
+  font-size: 25px;
+  display: flex;
+}
+.question__span {
+  margin-right: 10px;
+}
+
+.question__input {
+  width: 12%;
+  font-size: 25px;
+  line-height: 1;
+  padding: 0;
+}
+
+.button {
+  cursor: pointer;
+}
