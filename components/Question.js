@@ -4,7 +4,7 @@ export class Question {
     this._counter = counter;
     this._getTemplate(templateSelector);
     this._element = this._template.cloneNode(true);
-    this._input = this._element.querySelector('.question__input');
+    this.input = this._element.querySelector('.question__input');
     this._setEventListeners();
   }
 
@@ -15,7 +15,7 @@ export class Question {
   }
 
   _setEventListeners() {
-    this._input.addEventListener('keypress', function (event) {
+    this.input.addEventListener('keypress', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault();
         document.querySelector('button').click();
@@ -47,10 +47,10 @@ export class Question {
   }
 
   checkAnswer() {
-    const answer = parseInt(this._input.value);
+    const answer = parseInt(this.input.value);
 
     if (answer == this._gameNumber * this._counter) {
-      this._input.replaceWith(answer);
+      this.input.replaceWith(answer);
     }
     return answer == this._gameNumber * this._counter;
   }

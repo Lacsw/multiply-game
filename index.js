@@ -26,6 +26,19 @@ function handleBtnClick() {
     const next = questionItem.createQuestion();
     questions.append(next);
     next.querySelector('.question__input').focus();
+
+    setTimeout(() => {
+      btn.classList.remove('button_right');
+    }, 500);
+    btn.classList.add('button_right');
+  } else {
+    const questionInput = questionItem.input;
+    setTimeout(() => {
+      questionInput.classList.remove('quesiton__input_wrong');
+      btn.classList.remove('button_wrong');
+    }, 500);
+    questionInput.classList.add('quesiton__input_wrong');
+    btn.classList.add('button_wrong');
   }
 }
 
