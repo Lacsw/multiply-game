@@ -16,7 +16,13 @@ function createNewQuestion() {
   questionItem = new Question(settings);
   const newQuestion = questionItem.createQuestion();
   questions.append(newQuestion);
-  newQuestion.querySelector('.question__input').focus();
+
+  const input = newQuestion.querySelector('.question__input');
+  input.focus();
+  input.addEventListener('input', () => {
+    const isValid = isInputValid();
+    btn.disabled = !isValid;
+  });
 }
 
 function restartGame() {
@@ -26,18 +32,13 @@ function restartGame() {
   allQuestions.forEach((question) => {
     question.remove();
   });
-  questionItem = new Question(settings);
-  questions.append(questionItem.createQuestion());
-
-  setTimeout(() => {
-    btn.classList.remove('button_disabled');
-  }, 500);
-  btn.classList.add('button_disabled');
+  createNewQuestion();
 }
 
 function showRightButton() {
   setTimeout(() => {
     btn.classList.remove('button_right');
+    btn.disabled = true;
   }, 500);
   btn.classList.add('button_right');
 }
@@ -50,6 +51,11 @@ function showWrongButton() {
   }, 500);
   questionInput.classList.add('question__input_wrong');
   btn.classList.add('button_wrong');
+}
+
+function isInputValid() {
+  const inputValue = questionItem.input.value;
+  return /^\d+$/.test(inputValue);
 }
 
 function handleBtnClick() {

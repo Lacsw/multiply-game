@@ -20,14 +20,14 @@
   background-color: #AFEEEE;
 }
 
+.button:disabled {
+  background-color: #A9A9A9;
+}
+
 .button_right {
   background-color: #228B22;
 }
 
 .button_wrong {
   background-color: #FA8072;
-}
-
-.button_disabled {
-  background-color: #A9A9A9;
 }
