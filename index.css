@@ -16,7 +16,7 @@
   color: #fff;
 }
 
-.button:hover {
+.button:hover:not(.button_wrong, .button:disabled, .button_right) {
   background-color: #AFEEEE;
 }
 

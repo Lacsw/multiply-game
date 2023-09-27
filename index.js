@@ -45,6 +45,7 @@ function showRightButton() {
 
 function showWrongButton() {
   const questionInput = questionItem.input;
+  
   setTimeout(() => {
     questionInput.classList.remove('question__input_wrong');
     btn.classList.remove('button_wrong');
