@@ -48,7 +48,7 @@ export class Question {
 
   checkAnswer() {
     const answer = parseInt(this.input.value);
-
+    
     if (answer == this._gameNumber * this._counter) {
       this.input.replaceWith(answer);
     }

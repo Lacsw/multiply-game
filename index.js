@@ -1,5 +1,4 @@
 import { Question } from './components/Question.js';
-const questions = document.querySelector('.questions');
 
 const settings = {
   templateSelector: '.question-template',
@@ -7,38 +6,63 @@ const settings = {
   counter: 1,
 };
 
+const questions = document.querySelector('.questions');
+const btn = document.querySelector('button');
+
 let questionItem = new Question(settings);
+createNewQuestion();
 
 function createNewQuestion() {
+  questionItem = new Question(settings);
   const newQuestion = questionItem.createQuestion();
-  questionItem.checkAnswer();
-
-  return newQuestion;
+  questions.append(newQuestion);
+  newQuestion.querySelector('.question__input').focus();
 }
 
-questions.append(createNewQuestion());
+function restartGame() {
+  const allQuestions = document.querySelectorAll('.question');
+  settings.counter = 1;
 
-const btn = document.querySelector('button');
+  allQuestions.forEach((question) => {
+    question.remove();
+  });
+  questionItem = new Question(settings);
+  questions.append(questionItem.createQuestion());
+
+  setTimeout(() => {
+    btn.classList.remove('button_disabled');
+  }, 500);
+  btn.classList.add('button_disabled');
+}
+
+function showRightButton() {
+  setTimeout(() => {
+    btn.classList.remove('button_right');
+  }, 500);
+  btn.classList.add('button_right');
+}
+
+function showWrongButton() {
+  const questionInput = questionItem.input;
+  setTimeout(() => {
+    questionInput.classList.remove('question__input_wrong');
+    btn.classList.remove('button_wrong');
+  }, 500);
+  questionInput.classList.add('question__input_wrong');
+  btn.classList.add('button_wrong');
+}
+
 function handleBtnClick() {
   if (questionItem.checkAnswer()) {
     settings.counter++;
-    questionItem = new Question(settings);
-    const next = questionItem.createQuestion();
-    questions.append(next);
-    next.querySelector('.question__input').focus();
+    createNewQuestion();
+    showRightButton();
 
-    setTimeout(() => {
-      btn.classList.remove('button_right');
-    }, 500);
-    btn.classList.add('button_right');
+    if (settings.counter > 10) {
+      restartGame();
+    }
   } else {
-    const questionInput = questionItem.input;
-    setTimeout(() => {
-      questionInput.classList.remove('quesiton__input_wrong');
-      btn.classList.remove('button_wrong');
-    }, 500);
-    questionInput.classList.add('quesiton__input_wrong');
-    btn.classList.add('button_wrong');
+    showWrongButton();
   }
 }
 
